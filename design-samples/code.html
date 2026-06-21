@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PropManager Pro - Dashboard</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<!-- Material Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#45464d",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#d3e4fe",
+                        "tertiary-container": "#002113",
+                        "on-secondary-fixed-variant": "#004395",
+                        "on-surface": "#0b1c30",
+                        "on-primary-fixed": "#131b2e",
+                        "surface-tint": "#565e74",
+                        "surface-studio": "#F8FAFC",
+                        "on-secondary-container": "#fefcff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "secondary-fixed": "#d8e2ff",
+                        "inverse-surface": "#213145",
+                        "surface-bright": "#f8f9ff",
+                        "surface-container-high": "#dce9ff",
+                        "primary": "#000000",
+                        "primary-fixed-dim": "#bec6e0",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-container-low": "#eff4ff",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "on-background": "#0b1c30",
+                        "on-error": "#ffffff",
+                        "maintenance-urgent": "#EF4444",
+                        "on-primary-container": "#7c839b",
+                        "outline-variant": "#c6c6cd",
+                        "tertiary": "#000000",
+                        "on-error-container": "#93000a",
+                        "surface": "#f8f9ff",
+                        "primary-fixed": "#dae2fd",
+                        "on-primary": "#ffffff",
+                        "outline": "#76777d",
+                        "background": "#f8f9ff",
+                        "tenant-active": "#10B981",
+                        "secondary-container": "#2170e4",
+                        "on-tertiary-container": "#009668",
+                        "surface-dim": "#cbdbf5",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "inverse-primary": "#bec6e0",
+                        "secondary": "#0058be",
+                        "on-tertiary-fixed": "#002113",
+                        "surface-container-highest": "#d3e4fe",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#131b2e",
+                        "tertiary-fixed": "#6ffbbe",
+                        "surface-container": "#e5eeff",
+                        "on-secondary-fixed": "#001a42",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "border-subtle": "#E2E8F0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-lg": "32px",
+                        "container-margin-desktop": "40px",
+                        "gutter": "24px",
+                        "stack-sm": "8px",
+                        "container-margin-mobile": "16px",
+                        "stack-md": "16px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-caps": ["JetBrains Mono"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "body-lg": ["Inter"],
+                        "headline-md-mobile": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md-mobile": ["20px", {"lineHeight": "26px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f8f9ff;
+            color: #0b1c30;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #E2E8F0;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-body-md min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-on-background w-full top-0 sticky z-40 border-b border-border-subtle dark:border-outline-variant">
+<div class="flex justify-between items-center h-16 px-container-margin-mobile md:px-container-margin-desktop w-full">
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-primary cursor-pointer active:scale-95 duration-150 p-2 hover:bg-surface-container-low transition-colors" data-icon="menu">menu</span>
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface dark:text-inverse-on-surface">PropManager Pro</h1>
+</div>
+<div class="flex items-center gap-stack-md">
+<div class="hidden md:flex gap-stack-lg mr-stack-lg">
+<span class="text-secondary dark:text-secondary-fixed font-bold cursor-pointer">Dashboard</span>
+<span class="text-on-surface-variant dark:text-outline hover:bg-surface-container-low transition-colors px-2 rounded cursor-pointer">Properties</span>
+<span class="text-on-surface-variant dark:text-outline hover:bg-surface-container-low transition-colors px-2 rounded cursor-pointer">Units</span>
+<span class="text-on-surface-variant dark:text-outline hover:bg-surface-container-low transition-colors px-2 rounded cursor-pointer">Service</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high border border-outline-variant overflow-hidden cursor-pointer active:scale-95 duration-150">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a senior property manager with a confident and friendly expression. He is wearing a minimalist dark navy corporate suit in a high-contrast modern office setting with soft, natural lighting. The visual style is clean, corporate, and trustworthy, with a shallow depth of field and a neutral slate-gray background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAePp6TjMt3YuRPpxXvLlCueGfxt-1LPt_s5t1AeQS8UqKgJeegC5JW2pAUcSWa-N8zvFeEq9gG_z7m4kCmgDVWIZtu-1zn2I08c0ulIao_L9MxM0VdMGH5Cyy0H6vwGhjmNgutDxcXfZbWjOu7DpvWaVCxQ7BVvA6Lhheen2SCTWQJ9BT5Xrt-UXQ7kbcfmzAJsm0203xCKhgGmlrXWDDNAXtJ0gNoBV05vlKgCzT_xZbRIFmmeL5Uzo0ZuWAFOBpfY6dZ7I3XV3zy"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex">
+<!-- NavigationDrawer (Desktop Only) -->
+<aside class="hidden md:flex h-[calc(100vh-64px)] w-72 sticky top-16 bg-surface-container-lowest border-r border-border-subtle flex-col gap-2 py-4">
+<div class="px-6 mb-stack-lg">
+<p class="font-headline-md text-headline-md font-bold text-on-surface">Alex Sterling</p>
+<p class="font-body-sm text-on-surface-variant">Senior Property Manager</p>
+<p class="text-label-caps font-label-caps mt-2 text-secondary">Portfolio: 24 Units</p>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="bg-secondary-container text-on-secondary-container rounded-lg px-4 py-3 mx-2 flex items-center gap-stack-md transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-body-md text-body-md">Portfolio</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high px-4 py-3 mx-2 flex items-center gap-stack-md transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="construction">construction</span>
+<span class="font-body-md text-body-md">Maintenance</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high px-4 py-3 mx-2 flex items-center gap-stack-md transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-body-md text-body-md">Finances</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high px-4 py-3 mx-2 flex items-center gap-stack-md transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 px-container-margin-mobile md:px-container-margin-desktop py-stack-lg pb-32">
+<!-- Page Header -->
+<div class="mb-stack-lg flex flex-col md:flex-row md:items-end justify-between gap-stack-md">
+<div>
+<span class="text-label-caps font-label-caps text-on-surface-variant">OVERVIEW</span>
+<h2 class="font-display-lg text-display-lg mt-1">Portfolio Performance</h2>
+</div>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-lg font-body-md hover:bg-secondary transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]" data-icon="add">add</span>
+                    Add Property
+                </button>
+</div>
+<!-- Bento Grid Metrics -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-stack-lg">
+<!-- Total Revenue -->
+<div class="bg-white border border-border-subtle p-6 rounded-xl shadow-sm hover:border-secondary transition-all group overflow-hidden relative">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="text-label-caps font-label-caps text-on-surface-variant mb-1">TOTAL REVENUE</p>
+<h3 class="font-headline-md text-headline-md">$142,500.00</h3>
+</div>
+<span class="material-symbols-outlined text-secondary-container opacity-20 text-4xl group-hover:scale-110 transition-transform" data-icon="monetization_on">monetization_on</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-tenant-active flex items-center text-label-caps font-label-caps">
+<span class="material-symbols-outlined text-sm" data-icon="arrow_upward">arrow_upward</span> 12.5%
+                        </span>
+<span class="text-body-sm text-on-surface-variant">vs last month</span>
+</div>
+<!-- Micro Sparkline Simulation -->
+<div class="absolute bottom-0 left-0 w-full h-1 bg-secondary opacity-10"></div>
+</div>
+<!-- Occupancy Rate -->
+<div class="bg-white border border-border-subtle p-6 rounded-xl shadow-sm hover:border-secondary transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="text-label-caps font-label-caps text-on-surface-variant mb-1">OCCUPANCY RATE</p>
+<h3 class="font-headline-md text-headline-md">94.8%</h3>
+</div>
+<span class="material-symbols-outlined text-tenant-active opacity-20 text-4xl group-hover:scale-110 transition-transform" data-icon="group">group</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-tenant-active h-full w-[94.8%]"></div>
+</div>
+<p class="text-body-sm text-on-surface-variant mt-2">2 units vacant</p>
+</div>
+<!-- Pending Maintenance -->
+<div class="bg-white border border-border-subtle p-6 rounded-xl shadow-sm hover:border-secondary transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="text-label-caps font-label-caps text-on-surface-variant mb-1">MAINTENANCE</p>
+<h3 class="font-headline-md text-headline-md">08 Pending</h3>
+</div>
+<span class="material-symbols-outlined text-maintenance-urgent opacity-20 text-4xl group-hover:scale-110 transition-transform" data-icon="construction">construction</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 bg-red-100 text-maintenance-urgent rounded text-[10px] font-bold">3 URGENT</span>
+<span class="text-body-sm text-on-surface-variant">Next service tomorrow</span>
+</div>
+</div>
+</div>
+<!-- Main Dashboard Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Activity Feed (2/3 Wide) -->
+<div class="lg:col-span-2 flex flex-col gap-gutter">
+<!-- Recent Activity List -->
+<div class="bg-white border border-border-subtle rounded-xl overflow-hidden shadow-sm">
+<div class="px-6 py-4 border-b border-border-subtle flex justify-between items-center bg-surface-container-lowest">
+<h3 class="font-headline-sm text-headline-sm">Recent Activity</h3>
+<button class="text-secondary font-label-caps text-label-caps hover:underline">VIEW ALL</button>
+</div>
+<div class="divide-y divide-gray-50">
+<!-- Activity Item 1 -->
+<div class="p-6 hover:bg-surface transition-colors flex items-start gap-4">
+<div class="w-10 h-10 rounded-lg bg-red-50 text-maintenance-urgent flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined" data-icon="report">report</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<p class="font-body-md font-semibold">New maintenance request for Unit 4B</p>
+<span class="text-body-sm text-on-surface-variant">2h ago</span>
+</div>
+<p class="text-body-sm text-on-surface-variant mt-1">Water leakage reported in the master bathroom. High priority.</p>
+<div class="mt-3 flex gap-2">
+<button class="text-label-caps font-label-caps border border-border-subtle px-3 py-1 rounded hover:bg-primary hover:text-white transition-colors">ASSIGN</button>
+<button class="text-label-caps font-label-caps border border-border-subtle px-3 py-1 rounded hover:bg-primary hover:text-white transition-colors">DISMISS</button>
+</div>
+</div>
+</div>
+<!-- Activity Item 2 -->
+<div class="p-6 hover:bg-surface transition-colors flex items-start gap-4">
+<div class="w-10 h-10 rounded-lg bg-emerald-50 text-tenant-active flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<p class="font-body-md font-semibold">Rent received from Miller family</p>
+<span class="text-body-sm text-on-surface-variant">5h ago</span>
+</div>
+<p class="text-body-sm text-on-surface-variant mt-1">Transaction #TX-9021 confirmed for Pine Heights Unit 12.</p>
+</div>
+</div>
+<!-- Activity Item 3 -->
+<div class="p-6 hover:bg-surface transition-colors flex items-start gap-4">
+<div class="w-10 h-10 rounded-lg bg-blue-50 text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined" data-icon="person_add">person_add</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<p class="font-body-md font-semibold">New application submitted</p>
+<span class="text-body-sm text-on-surface-variant">Yesterday</span>
+</div>
+<p class="text-body-sm text-on-surface-variant mt-1">Sarah Jenkins applied for the studio unit at Skyview Plaza.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Properties Summary Table -->
+<div class="bg-white border border-border-subtle rounded-xl overflow-hidden shadow-sm">
+<div class="px-6 py-4 border-b border-border-subtle flex justify-between items-center bg-surface-container-lowest">
+<h3 class="font-headline-sm text-headline-sm">Active Properties</h3>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary" data-icon="filter_list">filter_list</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary" data-icon="search">search</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-gray-50 border-b border-border-subtle">
+<tr>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant">PROPERTY NAME</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant">LOCATION</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant">TENANT</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant">STATUS</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant">RENT</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-50">
+<tr class="hover:bg-surface transition-colors cursor-pointer group">
+<td class="px-6 py-4 font-body-md font-semibold">Pine Heights - 4B</td>
+<td class="px-6 py-4 text-on-surface-variant">Austin, TX</td>
+<td class="px-6 py-4">James Miller</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-emerald-100 text-tenant-active text-[11px] font-bold uppercase tracking-wider">Occupied</span>
+</td>
+<td class="px-6 py-4 text-on-surface">$2,450.00</td>
+</tr>
+<tr class="hover:bg-surface transition-colors cursor-pointer group">
+<td class="px-6 py-4 font-body-md font-semibold">Skyview Plaza - Studio</td>
+<td class="px-6 py-4 text-on-surface-variant">Austin, TX</td>
+<td class="px-6 py-4 text-outline">—</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-blue-100 text-secondary text-[11px] font-bold uppercase tracking-wider">Vacant</span>
+</td>
+<td class="px-6 py-4 text-on-surface">$1,100.00</td>
+</tr>
+<tr class="hover:bg-surface transition-colors cursor-pointer group">
+<td class="px-6 py-4 font-body-md font-semibold">Oak Manor - 12A</td>
+<td class="px-6 py-4 text-on-surface-variant">Round Rock, TX</td>
+<td class="px-6 py-4">Lucia Chen</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-red-100 text-maintenance-urgent text-[11px] font-bold uppercase tracking-wider">Past Due</span>
+</td>
+<td class="px-6 py-4 text-on-surface">$1,850.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Right Sidebar Widgets (1/3 Wide) -->
+<div class="flex flex-col gap-gutter">
+<!-- Revenue Analytics Mini-Chart -->
+<div class="bg-primary text-on-primary rounded-xl p-6 shadow-sm flex flex-col justify-between aspect-square md:aspect-auto md:h-72">
+<div>
+<p class="text-label-caps font-label-caps text-on-primary-container mb-2">MONTHLY GROWTH</p>
+<h3 class="font-headline-md text-headline-md">+14.2% Revenue</h3>
+</div>
+<!-- Decorative SVG Graph -->
+<div class="h-24 w-full mt-4">
+<svg class="w-full h-full overflow-visible" viewbox="0 0 200 60">
+<path d="M0 50 Q 25 45, 50 48 T 100 20 T 150 15 T 200 5" fill="none" stroke="white" stroke-linecap="round" stroke-width="3"></path>
+<circle cx="200" cy="5" fill="#6ffbbe" r="4"></circle>
+</svg>
+</div>
+<p class="text-body-sm opacity-70 mt-4">Projected $160k by year end based on current occupancy trends.</p>
+</div>
+<!-- Quick Alerts -->
+<div class="bg-white border border-border-subtle rounded-xl p-6 shadow-sm">
+<h4 class="font-headline-sm text-headline-sm mb-4">Critical Tasks</h4>
+<div class="space-y-4">
+<div class="flex items-center gap-3 p-3 bg-red-50 rounded-lg border-l-4 border-maintenance-urgent">
+<span class="material-symbols-outlined text-maintenance-urgent" data-icon="notification_important">notification_important</span>
+<div class="flex-1">
+<p class="font-body-sm font-semibold">Lease expiring (3)</p>
+<p class="text-[12px] text-on-surface-variant">Review renewals for Oak Manor.</p>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-lg border-l-4 border-secondary">
+<span class="material-symbols-outlined text-secondary" data-icon="task_alt">task_alt</span>
+<div class="flex-1">
+<p class="font-body-sm font-semibold">Fire Drill Scheduled</p>
+<p class="text-[12px] text-on-surface-variant">Tomorrow, 10:00 AM at Skyview.</p>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-2 border border-border-subtle rounded-lg text-label-caps font-label-caps hover:bg-gray-50">VIEW CALENDAR</button>
+</div>
+<!-- Map Widget Placeholder -->
+<div class="bg-white border border-border-subtle rounded-xl overflow-hidden shadow-sm">
+<div class="h-40 w-full relative">
+<img class="w-full h-full object-cover grayscale opacity-80" data-alt="A high-quality architectural satellite view map of a modern residential neighborhood in Austin, Texas. The map shows clean geometric street patterns, green spaces, and swimming pools with a sophisticated slate and blue color grading suitable for a premium property management interface. The lighting suggests late afternoon with soft shadows." data-location="Austin, Texas" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBngblD5x_KhBIJlbk3brNFtynQURe3DYLJvvsaxy6qsyRUST_0yumm_exbTmAJkBJogSW4rUadrVbFJgKoTPLvvmTSESEW1QzLuSPlUf4GNK6Di91ehA6aCil1Y6kDHh7EoIY8OVUUDl2V_vIslb6ykcWM1vkv3CzC_idCFOCiWcM4dlwg6Ef7-ZK9VMo_jZED4s55DebFjdrzZUJ9WCPE6razi4gTaIIjaSRADagp8BMrAun-aKGaJigz00D_sy-kLO2ItrYDPIDT"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-4">
+<span class="text-white text-label-caps font-label-caps">PORTFOLIO COVERAGE: AUSTIN</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center h-16 bg-surface dark:bg-on-background pb-safe border-t border-border-subtle z-50">
+<div class="flex flex-col items-center justify-center text-secondary font-bold transition-colors active:opacity-80">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-caps text-[10px]">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant transition-colors active:opacity-80">
+<span class="material-symbols-outlined" data-icon="domain">domain</span>
+<span class="font-label-caps text-[10px]">Properties</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant transition-colors active:opacity-80">
+<span class="material-symbols-outlined" data-icon="meeting_room">meeting_room</span>
+<span class="font-label-caps text-[10px]">Units</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant transition-colors active:opacity-80">
+<span class="material-symbols-outlined" data-icon="build">build</span>
+<span class="font-label-caps text-[10px]">Service</span>
+</div>
+</nav>
+<!-- FAB (Floating Action Button) - Visible on Mobile Dashboard -->
+<button class="md:hidden fixed bottom-20 right-6 w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center active:scale-95 transition-transform z-40">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+<script>
+        // Simple Micro-interactions
+        document.querySelectorAll('.active\\:scale-95').forEach(el => {
+            el.addEventListener('mousedown', () => el.classList.add('scale-95'));
+            el.addEventListener('mouseup', () => el.classList.remove('scale-95'));
+            el.addEventListener('mouseleave', () => el.classList.remove('scale-95'));
+        });
+
+        // Dashboard dynamic text greeting (time-based)
+        const greeting = () => {
+            const hour = new Date().getHours();
+            if (hour < 12) return "Good morning, Alex";
+            if (hour < 18) return "Good afternoon, Alex";
+            return "Good evening, Alex";
+        };
+        // Log to console for demo
+        console.log(`System initialized: ${greeting()}`);
+    </script>
+</body></html>

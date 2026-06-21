@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Maintenance Requests | PropManager Pro</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#45464d",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-variant": "#d3e4fe",
+                    "tertiary-container": "#002113",
+                    "on-secondary-fixed-variant": "#004395",
+                    "on-surface": "#0b1c30",
+                    "on-primary-fixed": "#131b2e",
+                    "surface-tint": "#565e74",
+                    "surface-studio": "#F8FAFC",
+                    "on-secondary-container": "#fefcff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "secondary-fixed": "#d8e2ff",
+                    "inverse-surface": "#213145",
+                    "surface-bright": "#f8f9ff",
+                    "surface-container-high": "#dce9ff",
+                    "primary": "#000000",
+                    "primary-fixed-dim": "#bec6e0",
+                    "inverse-on-surface": "#eaf1ff",
+                    "surface-container-low": "#eff4ff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "on-background": "#0b1c30",
+                    "on-error": "#ffffff",
+                    "maintenance-urgent": "#EF4444",
+                    "on-primary-container": "#7c839b",
+                    "outline-variant": "#c6c6cd",
+                    "tertiary": "#000000",
+                    "on-error-container": "#93000a",
+                    "surface": "#f8f9ff",
+                    "primary-fixed": "#dae2fd",
+                    "on-primary": "#ffffff",
+                    "outline": "#76777d",
+                    "background": "#f8f9ff",
+                    "tenant-active": "#10B981",
+                    "secondary-container": "#2170e4",
+                    "on-tertiary-container": "#009668",
+                    "surface-dim": "#cbdbf5",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "inverse-primary": "#bec6e0",
+                    "secondary": "#0058be",
+                    "on-tertiary-fixed": "#002113",
+                    "surface-container-highest": "#d3e4fe",
+                    "error-container": "#ffdad6",
+                    "primary-container": "#131b2e",
+                    "tertiary-fixed": "#6ffbbe",
+                    "surface-container": "#e5eeff",
+                    "on-secondary-fixed": "#001a42",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "border-subtle": "#E2E8F0"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "stack-lg": "32px",
+                    "container-margin-desktop": "40px",
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "container-margin-mobile": "16px",
+                    "stack-md": "16px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Hanken Grotesk"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "body-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-caps": ["JetBrains Mono"],
+                    "display-lg": ["Hanken Grotesk"],
+                    "body-lg": ["Inter"],
+                    "headline-md-mobile": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md-mobile": ["20px", {"lineHeight": "26px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f8f9ff;
+            color: #0b1c30;
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        /* Custom shadows based on Style Guidance */
+        .ambient-shadow {
+            box-shadow: 0px 4px 20px rgba(15, 23, 42, 0.08);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex min-h-screen">
+<!-- Navigation Drawer (Desktop Only) -->
+<aside class="hidden md:flex flex-col gap-2 py-4 h-full w-72 fixed left-0 top-0 bg-surface-container-lowest border-r border-border-subtle z-40" id="main-drawer">
+<!-- Profile Header -->
+<div class="px-6 py-6 mb-4 flex flex-col items-start gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a property manager named Alex Sterling. He is a middle-aged man with short dark hair, wearing a navy blue corporate blazer over a crisp white shirt. The background is a brightly lit, modern office with soft-focus architectural details and cool blue accents. High-quality lighting, professional corporate photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAx6waZWjfzbPGIK7_hLloPXt1yrR2VPvAJnaW-FlA_WPOoRgsZ9QgVVT76WcnnVvUEMwktMH6tJV_Pc8T3qCgNAp9IHebYlltGd3L5ybiatXeO58FgkkYGASBnF2va3pwvSiHv0ZLN0s35y3khQ8-fnBYLeBhuSBLF-gLRaTPI2OmWqv2oH4xr0EYWSh7qcdy6NiKut9AvoVIsMjevWygFX_i-nI5DqdBQ1DT9UM6ZUio4ewUt_SP5lMqzQdHlp9_WS6zmslbqbfuk"/>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Alex Sterling</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Senior Property Manager</p>
+<span class="font-label-caps text-label-caps text-on-primary-container mt-1 inline-block">Portfolio: 24 Units</span>
+</div>
+</div>
+<!-- Nav Items -->
+<nav class="flex-grow space-y-1">
+<a class="flex items-center text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high transition-all duration-200 ease-in-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined mr-3">analytics</span> Portfolio
+            </a>
+<a class="flex items-center bg-secondary-container text-on-secondary-container rounded-lg px-4 py-3 mx-2 transition-all duration-200 ease-in-out font-body-md text-body-md font-bold" href="#">
+<span class="material-symbols-outlined mr-3">construction</span> Maintenance
+            </a>
+<a class="flex items-center text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high transition-all duration-200 ease-in-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined mr-3">payments</span> Finances
+            </a>
+<a class="flex items-center text-on-surface-variant px-4 py-3 mx-2 hover:bg-surface-container-high transition-all duration-200 ease-in-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined mr-3">settings</span> Settings
+            </a>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-72 flex flex-col pb-24 md:pb-8">
+<!-- Top App Bar -->
+<header class="w-full top-0 sticky z-30 bg-surface border-b border-border-subtle flex justify-between items-center h-16 px-container-margin-mobile md:px-container-margin-desktop">
+<div class="flex items-center gap-3">
+<button class="md:hidden p-2 active:scale-95 duration-150 cursor-pointer">
+<span class="material-symbols-outlined text-primary">menu</span>
+</button>
+<h1 class="font-headline-md text-headline-md-mobile md:text-headline-md font-bold text-on-surface tracking-tight">PropManager Pro</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex gap-6 items-center mr-4">
+<span class="font-label-caps text-label-caps text-secondary font-bold cursor-pointer transition-colors">Service</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container-low transition-colors cursor-pointer px-2 py-1">Dashboard</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container-low transition-colors cursor-pointer px-2 py-1">Properties</span>
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-border-subtle cursor-pointer active:scale-95 transition-transform">
+<img class="w-full h-full object-cover" data-alt="A small circular avatar icon of a user profile, showing a professional man in a business setting with a minimalist blurred office background. Consistent with the modern corporate aesthetic and cool blue lighting tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9jFzcN1gbM-IgsG5Rl3XA7N-96bcXTjq8ZmXeXJOxJ1ypsqcQr8aLjB0LEttR0WBgAjrk_13d5Jur2skYeuWK3KkoeSfOa5eUBeNCDw9S_eqG-yU4yjuuD4PtKpFJcCUrXk9z18DPPINF6gKiIwlSsMWoDbsf3ThwS9NfGpcVZy7GMgqf8zKopq5VcBWDkRE-F_guc4xmh5Rr2VB_otMFw827KN009zGLZ_v8gWf0dXy5F2pAFdGNdXdDsM87Ht1cL-e3CEXdRTg-"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<section class="p-container-margin-mobile md:p-container-margin-desktop max-w-6xl mx-auto w-full">
+<!-- Welcome/Summary Section -->
+<div class="mb-stack-lg flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface">Maintenance</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2">Manage service tickets and track resolution efficiency across your portfolio.</p>
+</div>
+<div class="flex gap-2">
+<div class="bg-surface-container-lowest border border-border-subtle p-4 rounded-lg flex flex-col items-start min-w-[140px]">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Active</span>
+<span class="font-headline-md text-headline-md text-on-surface">12</span>
+</div>
+<div class="bg-surface-container-lowest border border-border-subtle p-4 rounded-lg flex flex-col items-start min-w-[140px]">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Pending Approval</span>
+<span class="font-headline-md text-headline-md text-secondary">04</span>
+</div>
+</div>
+</div>
+<!-- Filter Chips -->
+<div class="flex gap-2 mb-stack-md overflow-x-auto scrollbar-hide pb-2">
+<button class="bg-primary text-on-primary px-4 py-2 rounded-full font-label-caps text-label-caps whitespace-nowrap active:scale-95 transition-transform">All Tickets</button>
+<button class="bg-surface-container-low text-on-surface-variant border border-border-subtle px-4 py-2 rounded-full font-label-caps text-label-caps whitespace-nowrap hover:bg-surface-container-high transition-colors">Urgent</button>
+<button class="bg-surface-container-low text-on-surface-variant border border-border-subtle px-4 py-2 rounded-full font-label-caps text-label-caps whitespace-nowrap hover:bg-surface-container-high transition-colors">Plumbing</button>
+<button class="bg-surface-container-low text-on-surface-variant border border-border-subtle px-4 py-2 rounded-full font-label-caps text-label-caps whitespace-nowrap hover:bg-surface-container-high transition-colors">Electrical</button>
+<button class="bg-surface-container-low text-on-surface-variant border border-border-subtle px-4 py-2 rounded-full font-label-caps text-label-caps whitespace-nowrap hover:bg-surface-container-high transition-colors">Resolved</button>
+</div>
+<!-- Maintenance Tickets Grid -->
+<div class="space-y-stack-md">
+<!-- Ticket Item: High Priority -->
+<div class="group bg-surface-container-lowest border border-border-subtle hover:border-secondary transition-all duration-200 ambient-shadow md:flex overflow-hidden">
+<div class="md:w-1/4 h-48 md:h-auto relative">
+<img class="w-full h-full object-cover" data-alt="A macro photograph of a leaky kitchen faucet with water droplets catching the light. The kitchen is modern with clean white tiles and grey marble countertops. Professional architectural photography style, cool tones, bright and clean." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAMmVMbLKa8IA62RybKOXfW-L4Li-_J8gZndlA8iAtImKJ4HVNcGLUrH0u9LniptCnKDTtzhwWKg6KgK-076Zvo88BG_dyRU_h-Ni9aK590X9910ML-cBaSImqWGFfLWG1ZeXtEfxUBVHdtQjAWc4EFVfC9OklLZk2B08fAvOJcuq9XmJRu3w8A7b7-OH8X4X0OmTW-6Z2EDgZfhKWPKrO60IIBBFI3OLSP39B8T_7jUbhFR1KN3wvzfIil4R4IQXMJumIw8BHo7Tq"/>
+<div class="absolute top-3 left-3 flex flex-col gap-2">
+<span class="bg-maintenance-urgent text-on-error font-label-caps text-label-caps px-2 py-1 rounded-sm shadow-sm">Urgent</span>
+</div>
+</div>
+<div class="p-6 md:w-3/4 flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Kitchen Sink Pipe Burst</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">domain</span>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Azure Heights, Unit 402</p>
+</div>
+</div>
+<span class="bg-secondary-container/10 text-secondary border border-secondary/20 font-label-caps text-label-caps px-2 py-1 rounded">New</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">The main drainage pipe under the kitchen sink has developed a severe leak. Water is pooling in the cabinet and has started affecting the flooring.</p>
+<div class="mt-auto flex justify-between items-center pt-4 border-t border-gray-50">
+<div class="flex items-center gap-4">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-white bg-slate-200 overflow-hidden" title="Assigned Tech">
+<img class="w-full h-full object-cover" data-alt="A portrait of a professional maintenance technician, a woman in her 30s with a friendly smile, wearing a grey work uniform with a small logo. Bright, neutral indoor lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8z2X20dzGioGD66ZzkXdw8ghtnSNl8gzRdmr1THl-70Wh6H8j66uHW1EXKZ5Xxxdrfqy6jtEwXbbUNZqZI-KzmGqcMB6i6MG3e1Lt0HS08lOjbPMXzLkIbYbgIWA5DctHCtXfRoTmPxex2SvgfZ1cbJcphanRjkczw_Nrv8p5lSmT6HrHP7KvpfufSPM6CIwVFjyx0ajyJ1wdTBMp5c8S9JugUpIkbW8LKHtGsIg-5VeuSBg8HeYZ2UU4GdWHxMHWLD4VsXY5thYI"/>
+</div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant italic">Assigned to: Sarah Jenkins</span>
+</div>
+<button class="font-label-caps text-label-caps text-secondary font-bold hover:underline cursor-pointer">View Details</button>
+</div>
+</div>
+</div>
+<!-- Ticket Item: In Progress -->
+<div class="group bg-surface-container-lowest border border-border-subtle hover:border-secondary transition-all duration-200 ambient-shadow md:flex overflow-hidden">
+<div class="md:w-1/4 h-48 md:h-auto relative">
+<img class="w-full h-full object-cover" data-alt="Close up of a modern digital thermostat on a white wall showing a temperature reading. The lighting is soft and natural, reflecting a clean interior environment. High-end property management photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1zE7xNdRdhuCpyFFIGmPIfYlc29UKi8FEErgGJoSb1pAGfr3IB-MSCSknamAcdQVLIhYEAINDAZ4FwLZKf7Ub8hUILK-ISYvYwMniLOzevVqUTZyzMUsuhNTgM5udRZcGfvb17CwNFb3nGkycpegsDxUnbhPCcCmv2VpGuFce-oR0_sNAoKrbr5s_m5i9ZlRh-bseViZzCaiR2opum3Zi60drJngLbxrvZg2ZY-O5EybaLrENbq-wMurcYsg86m1GGOxbPn8dFxG8"/>
+</div>
+<div class="p-6 md:w-3/4 flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">HVAC Unit Not Cooling</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">domain</span>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">The Grandview, Unit 1201</p>
+</div>
+</div>
+<span class="bg-surface-variant text-secondary-container border border-secondary-container/20 font-label-caps text-label-caps px-2 py-1 rounded">In Progress</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2">Tenant reports the air conditioning is blowing warm air despite being set to 68 degrees. Possible compressor issue or coolant leak.</p>
+<div class="mt-auto flex justify-between items-center pt-4 border-t border-gray-50">
+<div class="flex items-center gap-4">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Last update: 2 hours ago</span>
+</div>
+<button class="font-label-caps text-label-caps text-secondary font-bold hover:underline cursor-pointer">View Details</button>
+</div>
+</div>
+</div>
+<!-- Ticket Item: Resolved (Zebra Style for list density as per guidelines) -->
+<div class="bg-gray-50/50 border border-border-subtle md:flex overflow-hidden opacity-70 grayscale-[0.2]">
+<div class="md:w-1/4 h-48 md:h-auto relative">
+<img class="w-full h-full object-cover" data-alt="A modern designer door handle on a dark wood door. The focus is sharp on the handle, with the hallway in a soft blur behind it. Calm and professional atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCljuxjCRL1J36KxvBj04xUoLf6k46AjKxPvqwBEXyxhnCkkyCdav2P6OKSt_d2FjnFHnWc3VvDADze8CqUjKAjmBkwUiwDHMc2KgB2o7LQPnx1qthI4vrvgRJIhmbyk-SeYY5mtaL_BLKZ6fSCUl9IBx50XVG0sCkZeMXk4Ubdq2tUF4PPegbpSUptxcsjf_h-FIp0ZvbmJ2XpO5FlLA6jwQtje9W1mNg1-BWDoSl10Te_9Hb50zcPk_Or2KBgJIsNvlPOjqHM62yC"/>
+</div>
+<div class="p-6 md:w-3/4 flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface-variant">Front Door Lock Sticking</h3>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-[16px] text-outline">domain</span>
+<p class="font-label-caps text-label-caps text-outline uppercase">Maple Courtyard, Unit 05</p>
+</div>
+</div>
+<span class="bg-tenant-active/10 text-tenant-active border border-tenant-active/20 font-label-caps text-label-caps px-2 py-1 rounded">Resolved</span>
+</div>
+<p class="font-body-md text-body-md text-outline mb-6 line-clamp-2">Smart lock battery replacement and mechanism lubrication completed.</p>
+<div class="mt-auto flex justify-between items-center pt-4 border-t border-outline-variant/10">
+<span class="font-body-sm text-body-sm text-outline">Resolved on: Oct 24, 2023</span>
+<button class="font-label-caps text-label-caps text-outline hover:text-on-surface transition-colors cursor-pointer">Archive</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 md:bottom-8 right-6 md:right-10 w-14 h-14 bg-primary text-on-primary rounded-full flex items-center justify-center shadow-lg active:scale-90 hover:bg-secondary-container transition-all duration-150 z-50" title="Add New Request">
+<span class="material-symbols-outlined text-2xl">add</span>
+</button>
+<!-- Bottom Navigation Bar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center h-16 bg-surface border-t border-border-subtle z-50 pb-safe">
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-[10px] mt-1">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined">domain</span>
+<span class="font-label-caps text-[10px] mt-1">Properties</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined">meeting_room</span>
+<span class="font-label-caps text-[10px] mt-1">Units</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary font-bold active:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">build</span>
+<span class="font-label-caps text-[10px] mt-1">Service</span>
+</a>
+</nav>
+<!-- Interaction Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Micro-interaction for cards
+            const cards = document.querySelectorAll('.ambient-shadow');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-2px)';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0px)';
+                });
+            });
+
+            // Tab logic simulation
+            const filterButtons = document.querySelectorAll('button[class*="rounded-full"]');
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterButtons.forEach(b => {
+                        b.classList.remove('bg-primary', 'text-on-primary');
+                        b.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+                    });
+                    btn.classList.add('bg-primary', 'text-on-primary');
+                    btn.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+                });
+            });
+        });
+    </script>
+</body></html>

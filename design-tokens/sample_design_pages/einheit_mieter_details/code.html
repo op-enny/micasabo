@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Unit Detail | PropManager Pro</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#45464d",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-variant": "#d3e4fe",
+                    "tertiary-container": "#002113",
+                    "on-secondary-fixed-variant": "#004395",
+                    "on-surface": "#0b1c30",
+                    "on-primary-fixed": "#131b2e",
+                    "surface-tint": "#565e74",
+                    "surface-studio": "#F8FAFC",
+                    "on-secondary-container": "#fefcff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "secondary-fixed": "#d8e2ff",
+                    "inverse-surface": "#213145",
+                    "surface-bright": "#f8f9ff",
+                    "surface-container-high": "#dce9ff",
+                    "primary": "#000000",
+                    "primary-fixed-dim": "#bec6e0",
+                    "inverse-on-surface": "#eaf1ff",
+                    "surface-container-low": "#eff4ff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "on-background": "#0b1c30",
+                    "on-error": "#ffffff",
+                    "maintenance-urgent": "#EF4444",
+                    "on-primary-container": "#7c839b",
+                    "outline-variant": "#c6c6cd",
+                    "tertiary": "#000000",
+                    "on-error-container": "#93000a",
+                    "surface": "#f8f9ff",
+                    "primary-fixed": "#dae2fd",
+                    "on-primary": "#ffffff",
+                    "outline": "#76777d",
+                    "background": "#f8f9ff",
+                    "tenant-active": "#10B981",
+                    "secondary-container": "#2170e4",
+                    "on-tertiary-container": "#009668",
+                    "surface-dim": "#cbdbf5",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "inverse-primary": "#bec6e0",
+                    "secondary": "#0058be",
+                    "on-tertiary-fixed": "#002113",
+                    "surface-container": "#e5eeff",
+                    "on-secondary-fixed": "#001a42",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "border-subtle": "#E2E8F0"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "stack-lg": "32px",
+                    "container-margin-desktop": "40px",
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "container-margin-mobile": "16px",
+                    "stack-md": "16px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Hanken Grotesk"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "body-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-caps": ["JetBrains Mono"],
+                    "display-lg": ["Hanken Grotesk"],
+                    "body-lg": ["Inter"],
+                    "headline-md-mobile": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md-mobile": ["20px", {"lineHeight": "26px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-studio text-on-surface">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-40 bg-surface dark:bg-on-background border-b border-border-subtle dark:border-outline-variant flex justify-between items-center h-16 px-container-margin-mobile md:px-container-margin-desktop">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed cursor-pointer active:scale-95 duration-150">menu</span>
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface dark:text-inverse-on-surface">PropManager Pro</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex gap-6 items-center px-6">
+<span class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary cursor-pointer">PORTFOLIO</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant hover:text-secondary cursor-pointer">MAINTENANCE</span>
+<span class="font-label-caps text-label-caps text-secondary font-bold">UNITS</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center overflow-hidden cursor-pointer active:scale-95 duration-150">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a senior property manager in his late 40s, Alex Sterling, with a friendly yet authoritative expression. He is wearing a sharp, tailored navy blue blazer over a crisp white shirt. The background is a brightly lit, high-end corporate office with soft architectural lines and a neutral, warm lighting scheme consistent with a modern corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrYKzoO5XNtvEeB5XnBQkQbjWS0EM1f5N2c2bOaVowNaX2WIahdCODz2O8BIJcOC3HmbbasoPP_wJIYRR_nVZWvsZFtzzULp_LgO4ZZYinCzOm8gs2I1I3qHoxLL_IRKZrfvZRw4_gk7QJwBoTOMph9wmK2SQ03KeZWlTfqUFmqCTCorGpvjQoUSqjIVXrPQ4TUjYIUoMe3qjnlAdvK-QIwU6SsX8tatwy7g5sNqfUN2UuHi7Hl0NsL-NfEOthqEixeawIOR5FOgwY"/>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-container-margin-mobile md:px-container-margin-desktop py-stack-lg flex flex-col gap-stack-lg mb-20">
+<!-- Breadcrumb & Actions -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">PROPERTIES / SKYLINE TOWERS</p>
+<h2 class="font-headline-md text-headline-md font-bold">Unit 14B — Penthouse</h2>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 border border-border-subtle bg-white text-on-surface font-body-sm flex items-center gap-2 hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+                    Edit Unit
+                </button>
+<button class="px-4 py-2 bg-primary text-white font-body-sm flex items-center gap-2 hover:bg-secondary transition-colors">
+<span class="material-symbols-outlined text-[18px]">add_task</span>
+                    New Service Request
+                </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Unit Specs (4 Columns) -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<div class="bg-white border border-border-subtle p-6 rounded-lg">
+<div class="aspect-video w-full mb-6 rounded-sm overflow-hidden border border-border-subtle">
+<img class="w-full h-full object-cover" data-alt="An ultra-modern high-density property interior featuring unit 14B. The space is a sun-drenched living room with floor-to-ceiling windows overlooking a city skyline. The interior is styled with minimalist Scandinavian furniture, white oak flooring, and a neutral color palette of slate, white, and soft charcoal. Professional architectural photography with high-key lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPI9unDDoowBiZ_A8KKsTJL8jaQwjIBIVDJuEsTvLDlYFnzo25F8PX4aZPcbVb2MKelzUaA8ZvcmnKciGT7mP1b4pqzWgdfBRqpxARUYJTFj-jlN233NHay6K0fAMNUV3FxaF7ezf57iY995pAfHaonj845h-1fTZOYY6ohOLa0AY-7CuoLvHdAWfgCTP6IBF6LBLge3jih0cDaDsMofkR5FJHV44Q5jdYLrp1cJeMtEUGiua7zRItBBYX95WYVJpxHvDIlAwF1gfz"/>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-center pb-3 border-b border-gray-50">
+<span class="font-label-caps text-label-caps text-on-surface-variant">FLOOR</span>
+<span class="font-body-md font-semibold">14th Floor</span>
+</div>
+<div class="flex justify-between items-center pb-3 border-b border-gray-50">
+<span class="font-label-caps text-label-caps text-on-surface-variant">SQUARE FOOTAGE</span>
+<span class="font-body-md font-semibold">1,240 sq. ft.</span>
+</div>
+<div class="flex justify-between items-center pb-3 border-b border-gray-50">
+<span class="font-label-caps text-label-caps text-on-surface-variant">BED / BATH</span>
+<span class="font-body-md font-semibold">2 Bed / 2.5 Bath</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant">RENT RATE</span>
+<span class="font-body-md font-semibold text-secondary">$4,250.00/mo</span>
+</div>
+</div>
+</div>
+<!-- Quick Stats -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-emerald-50 border border-emerald-100 p-4 rounded-lg">
+<p class="font-label-caps text-label-caps text-on-tertiary-fixed-variant mb-1">STATUS</p>
+<p class="font-headline-sm text-headline-sm text-tenant-active font-bold">Occupied</p>
+</div>
+<div class="bg-surface-container p-4 rounded-lg border border-border-subtle">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">LEASE ENDS</p>
+<p class="font-headline-sm text-headline-sm font-bold">144 Days</p>
+</div>
+</div>
+</div>
+<!-- Tenant & Payment History (8 Columns) -->
+<div class="md:col-span-8 flex flex-col gap-gutter">
+<!-- Tenant Profile Card -->
+<div class="bg-white border border-border-subtle overflow-hidden">
+<div class="p-6 border-b border-border-subtle bg-surface-container-low flex justify-between items-center">
+<h3 class="font-headline-sm text-headline-sm">Current Tenant</h3>
+<span class="bg-tenant-active/10 text-tenant-active px-2 py-1 font-label-caps text-[10px] rounded border border-tenant-active/20">ACTIVE LEASE</span>
+</div>
+<div class="p-6 flex flex-col md:flex-row gap-8">
+<div class="w-24 h-24 rounded-lg bg-surface-container-high border border-outline-variant shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A portrait of a professional woman in her early 30s, Eleanor Vance, the current tenant. She is wearing a modern business-casual outfit, a cream-colored turtleneck. The photo has a clean, editorial studio feel with soft light from the left side, against a neutral light gray background, conveying a reliable and established professional vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmeVMtZRU0qynif68BIs1PRAgIa8KLyeu4srbXbtUr42y1j9eViX0CUHezvNFfgZHmLtpxk-LEL7-6DMhLI1eoS7oRh9k01h4F0Fs8S8zTt-CXdzKAYB4AkMPFOj6rPxY_uwBf-WwzNgGXIFRKVN6q1LrlLgJSKZVg3XGEGaxTtP22amxXp8e48zmRNNyx96nVveBAPzThJhL9zcJNhn9V10uHJ5NXL3zolsrVA8ZsDJVs1Zk4Ihux2VNf4QlpCwh2wdwoMAmAlt9L"/>
+</div>
+<div class="flex-grow grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-1">FULL NAME</label>
+<p class="font-body-lg font-semibold">Eleanor Vance</p>
+</div>
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-1">CONTACT INFO</label>
+<p class="font-body-md">eleanor.vance@email.com</p>
+<p class="font-body-sm text-on-surface-variant">+1 (555) 942-0192</p>
+</div>
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-1">LEASE DATES</label>
+<p class="font-body-md">Sep 01, 2023 – Aug 31, 2024</p>
+<p class="font-body-sm text-on-surface-variant">Renewed once</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex-1 bg-secondary text-white py-2 font-label-caps text-label-caps hover:bg-blue-700 transition-colors">MESSAGE</button>
+<button class="flex-1 border border-border-subtle py-2 font-label-caps text-label-caps hover:bg-surface-container-low transition-colors">HISTORY</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Tabs for Details -->
+<div class="bg-white border border-border-subtle">
+<div class="flex border-b border-border-subtle overflow-x-auto">
+<button class="px-6 py-4 font-label-caps text-label-caps border-b-2 border-primary text-primary">PAYMENT HISTORY</button>
+<button class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface">COMMUNICATIONS</button>
+<button class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface">MAINTENANCE</button>
+<button class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface">DOCUMENTS</button>
+</div>
+<!-- Payment Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-studio border-b border-border-subtle">
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant">DATE</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant">DESCRIPTION</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant">AMOUNT</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant">STATUS</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-50">
+<tr class="hover:bg-gray-50">
+<td class="px-6 py-4 font-body-sm">Mar 01, 2024</td>
+<td class="px-6 py-4 font-body-sm">Monthly Rent — Unit 14B</td>
+<td class="px-6 py-4 font-body-sm font-semibold">$4,250.00</td>
+<td class="px-6 py-4 font-body-sm">
+<span class="inline-flex items-center gap-1.5 text-emerald-600 font-medium">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span> Paid
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary">download</span>
+</td>
+</tr>
+<tr class="bg-gray-50/30 hover:bg-gray-50">
+<td class="px-6 py-4 font-body-sm">Feb 01, 2024</td>
+<td class="px-6 py-4 font-body-sm">Monthly Rent — Unit 14B</td>
+<td class="px-6 py-4 font-body-sm font-semibold">$4,250.00</td>
+<td class="px-6 py-4 font-body-sm">
+<span class="inline-flex items-center gap-1.5 text-emerald-600 font-medium">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span> Paid
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary">download</span>
+</td>
+</tr>
+<tr class="hover:bg-gray-50">
+<td class="px-6 py-4 font-body-sm">Jan 05, 2024</td>
+<td class="px-6 py-4 font-body-sm">Late Fee — Jan 2024</td>
+<td class="px-6 py-4 font-body-sm font-semibold text-maintenance-urgent">$150.00</td>
+<td class="px-6 py-4 font-body-sm">
+<span class="inline-flex items-center gap-1.5 text-emerald-600 font-medium">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span> Paid
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary">download</span>
+</td>
+</tr>
+<tr class="bg-gray-50/30 hover:bg-gray-50">
+<td class="px-6 py-4 font-body-sm">Jan 01, 2024</td>
+<td class="px-6 py-4 font-body-sm">Monthly Rent — Unit 14B</td>
+<td class="px-6 py-4 font-body-sm font-semibold">$4,250.00</td>
+<td class="px-6 py-4 font-body-sm">
+<span class="inline-flex items-center gap-1.5 text-maintenance-urgent font-medium">
+<span class="w-2 h-2 rounded-full bg-maintenance-urgent"></span> Late
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary">download</span>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="p-4 flex justify-center border-t border-border-subtle">
+<button class="font-label-caps text-label-caps text-secondary font-bold">VIEW FULL LEDGER</button>
+</div>
+</div>
+</div>
+<!-- Recent Communications (Asymmetric Card) -->
+<div class="bg-white border border-border-subtle p-6 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary/5 -mr-16 -mt-16 rounded-full"></div>
+<div class="relative z-10">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-sm text-headline-sm">Recent Communications</h3>
+<button class="text-secondary font-label-caps text-label-caps hover:underline">NEW LOG</button>
+</div>
+<div class="space-y-6">
+<div class="flex gap-4 group">
+<div class="flex-shrink-0 w-10 h-10 rounded bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">chat</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-1">
+<p class="font-body-md font-semibold">Eleanor Vance</p>
+<span class="font-label-caps text-[10px] text-outline">MAR 12, 10:30 AM</span>
+</div>
+<p class="font-body-sm text-on-surface-variant leading-relaxed italic">"Just wanted to confirm the AC technician is scheduled for tomorrow at 2 PM. I'll be home to let them in."</p>
+</div>
+</div>
+<div class="flex gap-4 group">
+<div class="flex-shrink-0 w-10 h-10 rounded bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">mail</span>
+</div>
+<div class="flex-grow border-l-2 border-gray-100 pl-4">
+<div class="flex justify-between items-start mb-1">
+<p class="font-body-md font-semibold">Alex Sterling (Manager)</p>
+<span class="font-label-caps text-[10px] text-outline">MAR 11, 4:15 PM</span>
+</div>
+<p class="font-body-sm text-on-surface-variant leading-relaxed">System-generated notification sent: Rental increase notice for next lease term ($4,500 effective Sep 1).</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center h-16 bg-surface dark:bg-on-background pb-safe border-t border-border-subtle dark:border-outline-variant z-50">
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline active:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-[10px]">DASHBOARD</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline active:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">domain</span>
+<span class="font-label-caps text-[10px]">PROPERTIES</span>
+</div>
+<div class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim font-bold active:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">meeting_room</span>
+<span class="font-label-caps text-[10px]">UNITS</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline active:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">build</span>
+<span class="font-label-caps text-[10px]">SERVICE</span>
+</div>
+</nav>
+<!-- Side Navigation Drawer (Desktop Only - Logic Implementation) -->
+<aside class="hidden lg:flex h-full w-72 fixed left-0 top-0 border-r border-border-subtle dark:border-outline-variant bg-surface-container-lowest dark:bg-on-background flex-col gap-2 py-4 z-50">
+<div class="px-6 py-6 border-b border-border-subtle mb-4">
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface">PropManager Pro</h1>
+</div>
+<div class="flex items-center gap-4 px-6 py-4 mx-2 rounded-lg hover:bg-surface-container-high transition-all cursor-pointer">
+<div class="w-10 h-10 rounded bg-gray-100 overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A small thumbnail profile of Alex Sterling, senior property manager, in a professional suit. Minimalist clean corporate profile photo with neutral background and soft focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsWQGk47oT9rjgDs5fNaupnw0_OTitXhbVQODtj51TxU95q3KvI7eGfqukUU7DFakX5UT2oQrj2yytC2MU_1fpTZ6n7WCPKXB-aqziKXs1eSztfzdWYvJhcwAUlr30qdXE9bQkPrhMl19mbJ3PoGjXPN6LCr8xYvLY8OOp0GD0L0mqkFXFZMEOmQFNnzGTRY4EzGYZNv6-EErJWSSZbC_Q8HTMO12NsC1kEW04Ue6UFgt0tYN2bHUPfalWAWVbI9DOboDZEIPp46jt"/>
+</div>
+<div>
+<p class="font-body-md font-bold text-on-surface">Alex Sterling</p>
+<p class="text-[11px] font-label-caps text-on-surface-variant">PORTFOLIO: 24 UNITS</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1 mt-4">
+<div class="text-on-surface-variant dark:text-outline px-4 py-3 mx-2 flex items-center gap-3 hover:bg-surface-container-high transition-all cursor-pointer">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-body-md">Portfolio</span>
+</div>
+<div class="text-on-surface-variant dark:text-outline px-4 py-3 mx-2 flex items-center gap-3 hover:bg-surface-container-high transition-all cursor-pointer">
+<span class="material-symbols-outlined">construction</span>
+<span class="font-body-md">Maintenance</span>
+</div>
+<div class="bg-secondary-container text-on-secondary-container dark:bg-secondary dark:text-on-secondary rounded-lg px-4 py-3 mx-2 flex items-center gap-3">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-body-md">Finances</span>
+</div>
+<div class="text-on-surface-variant dark:text-outline px-4 py-3 mx-2 flex items-center gap-3 hover:bg-surface-container-high transition-all cursor-pointer">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Settings</span>
+</div>
+</nav>
+<div class="mt-auto px-4 py-8">
+<div class="bg-surface-container-low p-4 rounded-lg border border-border-subtle">
+<p class="font-label-caps text-[10px] text-on-surface-variant mb-2">SYSTEM LOAD</p>
+<div class="h-1.5 w-full bg-gray-200 rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[65%]"></div>
+</div>
+</div>
+</div>
+</aside>
+<script>
+        // Simple micro-interaction for tab switching
+        document.querySelectorAll('button.font-label-caps').forEach(button => {
+            button.addEventListener('click', function() {
+                if(this.parentElement.classList.contains('flex')) {
+                    this.parentElement.querySelectorAll('button').forEach(btn => {
+                        btn.classList.remove('border-b-2', 'border-primary', 'text-primary');
+                        btn.classList.add('text-on-surface-variant');
+                    });
+                    this.classList.add('border-b-2', 'border-primary', 'text-primary');
+                    this.classList.remove('text-on-surface-variant');
+                }
+            });
+        });
+    </script>
+</body></html>

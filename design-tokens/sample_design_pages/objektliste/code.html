@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PropManager Pro - Property Portfolio</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#45464d",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-variant": "#d3e4fe",
+                    "tertiary-container": "#002113",
+                    "on-secondary-fixed-variant": "#004395",
+                    "on-surface": "#0b1c30",
+                    "on-primary-fixed": "#131b2e",
+                    "surface-tint": "#565e74",
+                    "surface-studio": "#F8FAFC",
+                    "on-secondary-container": "#fefcff",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "secondary-fixed": "#d8e2ff",
+                    "inverse-surface": "#213145",
+                    "surface-bright": "#f8f9ff",
+                    "surface-container-high": "#dce9ff",
+                    "primary": "#000000",
+                    "primary-fixed-dim": "#bec6e0",
+                    "inverse-on-surface": "#eaf1ff",
+                    "surface-container-low": "#eff4ff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "on-background": "#0b1c30",
+                    "on-error": "#ffffff",
+                    "maintenance-urgent": "#EF4444",
+                    "on-primary-container": "#7c839b",
+                    "outline-variant": "#c6c6cd",
+                    "tertiary": "#000000",
+                    "on-error-container": "#93000a",
+                    "surface": "#f8f9ff",
+                    "primary-fixed": "#dae2fd",
+                    "on-primary": "#ffffff",
+                    "outline": "#76777d",
+                    "background": "#f8f9ff",
+                    "tenant-active": "#10B981",
+                    "secondary-container": "#2170e4",
+                    "on-tertiary-container": "#009668",
+                    "surface-dim": "#cbdbf5",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "inverse-primary": "#bec6e0",
+                    "secondary": "#0058be",
+                    "on-tertiary-fixed": "#002113",
+                    "surface-container-highest": "#d3e4fe",
+                    "error-container": "#ffdad6",
+                    "primary-container": "#131b2e",
+                    "tertiary-fixed": "#6ffbbe",
+                    "surface-container": "#e5eeff",
+                    "on-secondary-fixed": "#001a42",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "border-subtle": "#E2E8F0"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "stack-lg": "32px",
+                    "container-margin-desktop": "40px",
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "container-margin-mobile": "16px",
+                    "stack-md": "16px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Hanken Grotesk"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "body-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-caps": ["JetBrains Mono"],
+                    "display-lg": ["Hanken Grotesk"],
+                    "body-lg": ["Inter"],
+                    "headline-md-mobile": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md-mobile": ["20px", {"lineHeight": "26px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: #f8f9ff; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-surface border-b border-border-subtle z-40">
+<div class="flex justify-between items-center h-16 px-container-margin-mobile md:px-container-margin-desktop w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer active:scale-95 duration-150">menu</span>
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface">PropManager Pro</h1>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex gap-8">
+<a class="font-label-caps text-label-caps text-secondary font-bold hover:bg-surface-container-low transition-colors px-2 py-1" href="#">Portfolio</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container-low transition-colors px-2 py-1" href="#">Reports</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container-low transition-colors px-2 py-1" href="#">Tenants</a>
+</nav>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-border-subtle cursor-pointer active:scale-95 transition-transform">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a senior property manager with a confident expression, set against a clean, light-grey corporate background. The lighting is soft and even, highlighting the detailed textures of their professional attire. The overall aesthetic is modern, clean, and corporate, reflecting a high-trust professional environment using a palette of white, slate, and navy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBymwhS-DkHWymMdMNjgjeLTWI-mo6AueIsuZl26ySvzBV54TTI9Uulou9psL2GRHd_KiQJbLEYINJpqKcjYVpqFyD847FGSFZmg_NREown9JwoYK0HSXni2D2pg7YwKD95A8bkheZOMg3QcgZdY46FIHuVt-1Bmi5Ya6jq56V6LjyKtRwJQbNgOGh5rYTC8Hrw2XVkuFHErghZDqS5dW33i6nRNx_3gKL8b0U-mumf2dy_Utb9PWcR_nw50V0WLwrGj0CY-kmNn1NR"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex min-h-screen">
+<!-- NavigationDrawer (Desktop Only) -->
+<aside class="hidden lg:flex h-full w-72 fixed left-0 top-16 bg-surface-container-lowest border-r border-border-subtle flex-col gap-2 py-4 z-30">
+<div class="px-6 py-4 mb-4">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-12 h-12 rounded-lg bg-primary-container flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm">Alex Sterling</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Senior Manager</p>
+</div>
+</div>
+<div class="bg-surface-container-low rounded p-2 text-center">
+<span class="font-label-caps text-label-caps text-secondary">Portfolio: 24 Units</span>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="bg-secondary-container text-on-secondary-container rounded-lg px-4 py-3 mx-2 flex items-center gap-3 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-body-md text-body-md">Portfolio</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high px-4 py-3 mx-2 flex items-center gap-3 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">construction</span>
+<span class="font-body-md text-body-md">Maintenance</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high px-4 py-3 mx-2 flex items-center gap-3 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-body-md text-body-md">Finances</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high px-4 py-3 mx-2 flex items-center gap-3 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Content Canvas -->
+<div class="flex-1 lg:ml-72 p-6 md:p-10 mb-20 md:mb-0">
+<!-- Header & Search -->
+<section class="mb-10">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h2 class="font-display-lg text-display-lg text-on-surface mb-2">Properties</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Managing 12 active listings across 4 regions.</p>
+</div>
+<div class="flex gap-3">
+<button class="bg-primary text-on-primary px-6 py-3 rounded-lg font-body-md text-body-md flex items-center gap-2 hover:bg-on-background transition-colors active:scale-95">
+<span class="material-symbols-outlined">add</span>
+                            Add Property
+                        </button>
+</div>
+</div>
+<!-- Filters Bar -->
+<div class="mt-8 flex flex-wrap items-center gap-4 bg-white p-4 rounded-xl border border-border-subtle shadow-sm">
+<div class="relative flex-1 min-w-[280px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-bright border border-border-subtle rounded focus:border-secondary focus:ring-2 focus:ring-secondary/10 outline-none transition-all font-body-sm text-body-sm" placeholder="Search by name, address, or ID..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 border border-border-subtle rounded flex items-center gap-2 font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                            Filters
+                        </button>
+<button class="px-4 py-2 border border-border-subtle rounded flex items-center gap-2 font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]">sort</span>
+                            Sort
+                        </button>
+</div>
+</div>
+</section>
+<!-- Property List (Bento Grid Style) -->
+<section class="bento-grid">
+<!-- Property Card 1 -->
+<article class="bg-white border border-border-subtle rounded-xl overflow-hidden hover:shadow-lg transition-all group cursor-pointer">
+<div class="relative h-48 w-full">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="A high-angle architectural photograph of a modern luxury apartment building in a vibrant urban setting. The structure features clean lines, expansive glass windows, and lush rooftop gardens. The scene is bathed in warm, golden hour sunlight, creating a high-contrast and inviting atmosphere. The design is contemporary and sleek, dominated by cool grey tones and natural greenery." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB8KHfd0kAP3gMm3Vdcye4WV0tSwZ-e-QqIyjD6tM62LYGMU7bgDDzXZtqzvKYkfkap1KhFWfdKNdPkbwhDcRZ4GVimum08CcUpFg4tDi-eZ9Nfk14NIVqqlATAnSg9YCl8lvJtnzQ7lNo1wqi4XcFgLac20AS_Lzvy96I2MOPbbZvgMmIIDxSUwu04jb4dWiul1e4hBPW-nU97uD9RdzQd_mBtRPJoQwmD-flEp9eA8TuGQDG-wfRGf61s7eTUSNT7Vhp2AqW87LtE')"></div>
+<div class="absolute top-4 right-4">
+<span class="bg-emerald-100 text-tenant-active px-3 py-1 rounded-full font-label-caps text-label-caps font-bold">OCCUPIED</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="font-headline-sm text-headline-sm mb-1 group-hover:text-secondary transition-colors">The Heights Residency</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mb-4">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                            452 West End Ave, New York, NY
+                        </p>
+<div class="grid grid-cols-2 gap-4 border-t border-border-subtle pt-4">
+<div>
+<p class="font-label-caps text-label-caps text-outline uppercase mb-1">Units</p>
+<p class="font-headline-sm text-headline-sm">24</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-outline uppercase mb-1">Occupancy</p>
+<p class="font-headline-sm text-headline-sm">100%</p>
+</div>
+</div>
+</div>
+</article>
+<!-- Property Card 2 -->
+<article class="bg-white border border-border-subtle rounded-xl overflow-hidden hover:shadow-lg transition-all group cursor-pointer">
+<div class="relative h-48 w-full">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="A photograph of a charming, renovated historic brick townhouse on a quiet, tree-lined street. The property showcases meticulous craftsmanship with its black wrought-iron railings and polished wooden doors. The lighting is crisp morning light, emphasizing the textures of the old brick and the vibrant green leaves of the trees. The overall mood is prestigious and well-maintained." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB27z3tTJPEliAVaMzVMMP-tZ6RoZIdUWIDDlQbDoTX9Fyra1YqH98irp9m0_vZoe5qrZoNdsunkdijH4PCRXP9FMIAg2D_SaS4CJ72aCp_93cx7CPOzfw27HNFwn_cLjLHToufdbk7SOAuCMfo5FL19IBO0IMm3-OXv7ciz_Lh5W4acFhexSKZvV54Yv2PD3Jslqy4KapywCf6rtTuzltdPoILI8Ad_kZ7bPL9bS8TTndKQvUMHug5FGzfw_3_B5G3GKRRVk9oEPpJ')"></div>
+<div class="absolute top-4 right-4">
+<span class="bg-red-100 text-maintenance-urgent px-3 py-1 rounded-full font-label-caps text-label-caps font-bold">2 VACANT</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="font-headline-sm text-headline-sm mb-1 group-hover:text-secondary transition-colors">Oakwood Commons</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mb-4">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                            8822 Oak Street, Chicago, IL
+                        </p>
+<div class="grid grid-cols-2 gap-4 border-t border-border-subtle pt-4">
+<div>
+<p class="font-label-caps text-label-caps text-outline uppercase mb-1">Units</p>
+<p class="font-headline-sm text-headline-sm">12</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-outline uppercase mb-1">Occupancy</p>
+<p class="font-headline-sm text-headline-sm">83%</p>
+</div>
+</div>
+</div>
+</article>
+<!-- Property Card 3 -->
+<article class="bg-white border border-border-subtle rounded-xl overflow-hidden hover:shadow-lg transition-all group cursor-pointer">
+<div class="relative h-48 w-full">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="A clean, minimalist commercial office space building featuring a combination of steel, glass, and concrete. Large floor-to-ceiling windows reflect a clear blue sky. The landscaping around the building is sharp and modern, with manicured grass and ornamental stones. The lighting is bright and professional, creating a clean, high-productivity aesthetic using cool blue and metallic tones." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCfSqq0viGnkwVd8WUDQ5dltgbUo-ENjdPMOOrbsccn7hZEyFBgjGw8x-4pL5nZVcDT0xBvhnizFk2vUzUpQoezd6vNYjqH0jbv-G1c0XjRKlNbzcYOszi5MIuVvSGGbgV5QSRuVV3pPw_OjUVmDLC1xTNBK7fRWTNS51pa6g87uL6J1Ja7Cl5R1powTJ61GBrLTVuGBEesJELfqDvuE24_T26Ej-LKLDF_IFhHEAiY9KzbW_aFuJQJffQYwWnetQYBqrmD59ntvMa9')"></div>
+<div class="absolute top-4 right-4">
+<span class="bg-emerald-100 text-tenant-active px-3 py-1 rounded-full font-label-caps text-label-caps font-bold">OCCUPIED</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="font-headline-sm text-headline-sm mb-1 group-hover:text-secondary transition-colors">Sterling Plaza</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mb-4">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                            1200 Commerce Blvd, Austin, TX
+                        </p>
+<div class="grid grid-cols-2 gap-4 border-t border-border-subtle pt-4">
+<div>
+<p class="font-label-caps text-label-caps text-outline uppercase mb-1">Units</p>
+<p class="font-headline-sm text-headline-sm">8</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-outline uppercase mb-1">Occupancy</p>
+<p class="font-headline-sm text-headline-sm">100%</p>
+</div>
+</div>
+</div>
+</article>
+<!-- Property Card 4 -->
+<article class="bg-white border border-border-subtle rounded-xl overflow-hidden hover:shadow-lg transition-all group cursor-pointer">
+<div class="relative h-48 w-full">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="An exterior view of a stylish mid-century modern apartment complex with cantilevered balconies and large sliding doors. The palette consists of warm wood accents and charcoal grey siding. Soft evening lighting illuminates the unit interiors, suggesting a cozy and inhabited space. The surrounding landscape features desert plants like succulents and palms under a deep twilight sky." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBSG839xI-JUU77RMuieN__fPILoOGZKjeovzsxMtoEv_2kyAxOFx9BM0BjuXOY4h4ZAJ4ZhAFTxPQoBhig1mMQc60FkXNk-WP-K7jpdE2yRJ1a3S13eZAy2UlxqbvtMqvkbZzgil-q6xezbqoXwcG7l8NjgFFD41H4PGVdyYnDBkmsu_RNC8km_rJh1tGfyDDk7jL7d9WAL0SOBUYZV6te-YHNriGS1wuGtD8gr5cBNMJUfUJJOWIzs333izzpUYXGk9Vw9fixFzeQ')"></div>
+<div class="absolute top-4 right-4">
+<span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full font-label-caps text-label-caps font-bold">1 VACANT</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="font-headline-sm text-headline-sm mb-1 group-hover:text-secondary transition-colors">Riverview Lofts</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mb-4">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                            202 Riverside Dr, Portland, OR
+                        </p>
+<div class="grid grid-cols-2 gap-4 border-t border-border-subtle pt-4">
+<div>
+<p class="font-label-caps text-label-caps text-outline uppercase mb-1">Units</p>
+<p class="font-headline-sm text-headline-sm">32</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-outline uppercase mb-1">Occupancy</p>
+<p class="font-headline-sm text-headline-sm">97%</p>
+</div>
+</div>
+</div>
+</article>
+<!-- Skeleton/Add New Card -->
+<article class="border-2 border-dashed border-border-subtle rounded-xl flex flex-col items-center justify-center p-12 hover:border-secondary group cursor-pointer transition-colors bg-surface-studio">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center mb-4 group-hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:text-on-secondary-container">add_business</span>
+</div>
+<p class="font-headline-sm text-headline-sm text-on-surface-variant">Add Property</p>
+<p class="font-body-sm text-body-sm text-outline text-center mt-2 px-6">Onboard a new building to your digital portfolio.</p>
+</article>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center h-16 bg-surface border-t border-border-subtle pb-safe z-50">
+<button class="flex flex-col items-center justify-center text-on-surface-variant active:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</button>
+<button class="flex flex-col items-center justify-center text-secondary font-bold active:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">domain</span>
+<span class="font-label-caps text-label-caps">Properties</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant active:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">meeting_room</span>
+<span class="font-label-caps text-label-caps">Units</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant active:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">build</span>
+<span class="font-label-caps text-label-caps">Service</span>
+</button>
+</nav>
+<!-- FAB (Contextual) -->
+<button class="fixed right-6 bottom-20 md:bottom-10 bg-primary text-on-primary w-14 h-14 rounded-full shadow-lg flex items-center justify-center hover:bg-secondary transition-colors active:scale-95 z-40">
+<span class="material-symbols-outlined">add</span>
+</button>
+<script>
+        // Micro-interaction for property card hovering
+        document.querySelectorAll('article').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-4px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Simple search highlight effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.style.boxShadow = '0 0 0 2px rgba(33, 112, 228, 0.1)';
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.style.boxShadow = 'none';
+        });
+    </script>
+</body></html>

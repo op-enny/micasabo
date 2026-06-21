@@ -30,7 +30,9 @@ Database initialisation (first run only):
 sqlite3 data/micasabo.db < schema.sql
 ```
 
-SQLite foreign keys must be enabled per connection (`PRAGMA foreign_keys = ON`).
+SQLite foreign keys and WAL mode are enabled at the top of `schema.sql` via `PRAGMA` statements. The backend must also set `PRAGMA foreign_keys = ON` on every new connection (PRAGMAs do not persist).
+
+`updated_at` columns are maintained automatically by per-table `AFTER UPDATE` triggers defined in `schema.sql` — do not update them manually.
 
 ---
 

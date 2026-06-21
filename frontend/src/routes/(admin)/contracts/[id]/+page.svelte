@@ -4,116 +4,154 @@
   const c = $derived(data.contract as Record<string,unknown>);
   const tenants = $derived((c.tenants ?? []) as Record<string,unknown>[]);
   const activeTenants = $derived(tenants.filter(t => !t.auszug));
+  const formerTenants = $derived(tenants.filter(t => t.auszug));
 </script>
 
-<svelte:head><title>micasabo · Vertrag {c.id}</title></svelte:head>
+<svelte:head><title>micasabo · Vertrag #{c.id}</title></svelte:head>
 
-<div class="breadcrumb">
-  <a href="/properties/{c.property_id}">{c.objekt_name}</a> / Vertrag #{c.id}
+<!-- Breadcrumb -->
+<nav class="flex items-center gap-2 font-label-caps text-label-caps text-on-surface-variant mb-stack-lg">
+  <a href="/properties/{c.property_id}" class="hover:text-secondary transition-colors">{String(c.objekt_name).toUpperCase()}</a>
+  <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+  <span class="text-on-surface">VERTRAG #{c.id}</span>
+</nav>
+
+<!-- Page header -->
+<div class="mb-stack-lg">
+  <p class="font-label-caps text-label-caps text-on-surface-variant uppercase">VERTRAG</p>
+  <h2 class="font-display-lg text-4xl font-bold text-on-surface mt-1" style="font-family:'Hanken Grotesk',sans-serif">{c.objekt_name}</h2>
 </div>
 
-{#if form?.error}<p class="err">{form.error}</p>{/if}
-{#if form?.success}<p class="ok">Gespeichert.</p>{/if}
+{#if form?.error}
+<div class="flex items-center gap-3 p-3 bg-error-container rounded border-l-4 border-error mb-stack-md">
+  <span class="material-symbols-outlined text-error text-[20px]">error</span>
+  <p class="font-body-sm text-on-error-container">{form.error}</p>
+</div>
+{/if}
+{#if form?.success}
+<div class="flex items-center gap-3 p-3 bg-surface-container rounded border-l-4 border-tertiary mb-stack-md">
+  <span class="material-symbols-outlined text-tertiary text-[20px]">check_circle</span>
+  <p class="font-body-sm text-on-surface">Gespeichert.</p>
+</div>
+{/if}
 
-<div class="grid">
-  <!-- Contract details -->
-  <section class="card">
-    <h2>Vertragsdetails</h2>
-    <div class="kv"><span>Beginn</span><strong>{c.beginn_datum}</strong></div>
-    <div class="kv"><span>Ende</span><strong>{c.ende_datum ?? (c.unbefristet ? 'unbefristet' : '—')}</strong></div>
-    <div class="kv"><span>Gesamtmiete</span><strong>{c.miete_gesamt} €</strong></div>
-    <div class="kv"><span>Nebenkosten</span><strong>{c.nebenkosten} €</strong></div>
-    <div class="kv"><span>Status</span><strong>{c.status}</strong></div>
-  </section>
-
-  <!-- Active occupancy -->
-  <section class="card">
-    <h2>Aktuelle Belegung ({activeTenants.length} Person{activeTenants.length !== 1 ? 'en' : ''})</h2>
-    {#each activeTenants as ct}
-    <div class="tenant-row">
-      <div class="info">
-        <a href="/tenants/{ct.tenant_id}">{ct.nachname}, {ct.vorname}</a>
-        <span class="meta">{ct.rolle} · Einzug {ct.einzug ?? '?'}</span>
-        {#if ct.gesamtschuldnerisch}<span class="badge blue">gesamtschuldnerisch</span>{/if}
-        {#if ct.mietanteil}<span class="meta">{ct.mietanteil} € Anteil</span>{/if}
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+  <!-- Vertragsdetails -->
+  <div class="card overflow-hidden">
+    <div class="px-6 py-4 border-b border-border-subtle bg-surface-container-lowest">
+      <h3 class="font-headline-sm text-headline-sm" style="font-family:'Hanken Grotesk',sans-serif">Vertragsdetails</h3>
+    </div>
+    <dl class="divide-y divide-border-subtle">
+      {#each [
+        ['Beginn', c.beginn_datum],
+        ['Ende', c.ende_datum ?? (c.unbefristet ? 'Unbefristet' : '—')],
+        ['Gesamtmiete', c.miete_gesamt != null ? `${c.miete_gesamt} €` : '—'],
+        ['Nebenkosten', c.nebenkosten != null ? `${c.nebenkosten} €` : '—'],
+        ['Status', c.status],
+      ] as [label, value]}
+      <div class="flex justify-between items-center px-6 py-3">
+        <dt class="font-label-caps text-label-caps text-on-surface-variant">{label.toUpperCase()}</dt>
+        <dd class="font-body-sm font-semibold text-on-surface">{value}</dd>
       </div>
-      <details class="auszug-form">
-        <summary class="link">Auszug erfassen</summary>
-        <form method="POST" action="?/recordAuszug" use:enhance class="inline-form">
-          <input type="hidden" name="ct_id" value={ct.id} />
-          <input type="date" name="auszug" required />
-          <button type="submit" class="btn-sm">Speichern</button>
+      {/each}
+    </dl>
+  </div>
+
+  <!-- Aktuelle Belegung -->
+  <div class="card overflow-hidden">
+    <div class="px-6 py-4 border-b border-border-subtle flex justify-between items-center bg-surface-container-lowest">
+      <h3 class="font-headline-sm text-headline-sm" style="font-family:'Hanken Grotesk',sans-serif">Aktuelle Belegung</h3>
+      <span class="font-label-caps text-label-caps text-on-surface-variant">{activeTenants.length} PERSON{activeTenants.length !== 1 ? 'EN' : ''}</span>
+    </div>
+    <div class="divide-y divide-border-subtle">
+      {#each activeTenants as ct}
+      <div class="px-6 py-4">
+        <div class="flex items-start justify-between mb-2">
+          <div>
+            <a href="/tenants/{ct.tenant_id}" class="font-body-sm font-semibold text-secondary hover:underline">{ct.nachname}, {ct.vorname}</a>
+            <p class="font-label-caps text-label-caps text-on-surface-variant mt-0.5">{ct.rolle} · Einzug {ct.einzug ?? '?'}</p>
+          </div>
+          <div class="flex flex-col items-end gap-1">
+            {#if ct.gesamtschuldnerisch}
+            <span class="font-label-caps text-[10px] bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 rounded-full uppercase">Gesamtschuldnerisch</span>
+            {/if}
+            {#if ct.mietanteil}
+            <span class="font-label-caps text-label-caps text-on-surface-variant">{ct.mietanteil} € Anteil</span>
+            {/if}
+          </div>
+        </div>
+        <details class="mt-2">
+          <summary class="font-label-caps text-label-caps text-secondary cursor-pointer hover:underline">AUSZUG ERFASSEN</summary>
+          <form method="POST" action="?/recordAuszug" use:enhance class="flex items-end gap-3 mt-3">
+            <input type="hidden" name="ct_id" value={ct.id} />
+            <div><label class="label">AUSZUGSDATUM</label><input type="date" name="auszug" required class="input" /></div>
+            <button type="submit" class="btn-secondary mb-0.5">Speichern</button>
+          </form>
+        </details>
+      </div>
+      {/each}
+      {#if activeTenants.length === 0}
+      <p class="px-6 py-6 text-center font-body-sm text-on-surface-variant">Keine aktiven Mieter.</p>
+      {/if}
+    </div>
+    <div class="px-6 py-4 border-t border-border-subtle bg-surface-container-lowest">
+      <details>
+        <summary class="font-label-caps text-label-caps text-secondary cursor-pointer hover:underline">+ MIETER HINZUFÜGEN</summary>
+        <form method="POST" action="?/addTenant" use:enhance class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-gutter">
+          <div>
+            <label class="label">MIETER</label>
+            <select name="tenant_id" required class="input">
+              {#each data.allTenants as t}
+              <option value={t.id}>{t.nachname}, {t.vorname}</option>
+              {/each}
+            </select>
+          </div>
+          <div>
+            <label class="label">ROLLE</label>
+            <select name="rolle" class="input">
+              <option value="hauptmieter">Hauptmieter</option>
+              <option value="mitmieter" selected>Mitmieter</option>
+              <option value="untermieter">Untermieter</option>
+            </select>
+          </div>
+          <div><label class="label">EINZUG</label><input type="date" name="einzug" class="input" /></div>
+          <div><label class="label">MIETANTEIL (€)</label><input type="number" step="0.01" name="mietanteil" class="input" /></div>
+          <div><label class="label">KAUTION (€)</label><input type="number" step="0.01" name="kaution_betrag" class="input" /></div>
+          <div class="flex flex-col gap-3 justify-end">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" name="gesamtschuldnerisch" checked class="rounded border-border-subtle text-secondary w-4 h-4" />
+              <span class="font-body-sm text-on-surface">Gesamtschuldnerisch</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" name="kaution_erhalten" class="rounded border-border-subtle text-secondary w-4 h-4" />
+              <span class="font-body-sm text-on-surface">Kaution erhalten</span>
+            </label>
+          </div>
+          <div class="md:col-span-2">
+            <button type="submit" class="btn-primary">Hinzufügen</button>
+          </div>
         </form>
       </details>
     </div>
-    {/each}
+  </div>
 
-    <!-- Add tenant to contract -->
-    <details class="form-toggle">
-      <summary>+ Mieter hinzufügen</summary>
-      <form method="POST" action="?/addTenant" use:enhance class="sub-form">
-        <label>Mieter<select name="tenant_id" required>
-          {#each data.allTenants as t}
-          <option value={t.id}>{t.nachname}, {t.vorname}</option>
-          {/each}
-        </select></label>
-        <label>Rolle<select name="rolle">
-          <option value="hauptmieter">Hauptmieter</option>
-          <option value="mitmieter" selected>Mitmieter</option>
-          <option value="untermieter">Untermieter</option>
-        </select></label>
-        <label>Einzug<input type="date" name="einzug" /></label>
-        <label>Mietanteil (€)<input type="number" step="0.01" name="mietanteil" /></label>
-        <label>Kaution (€)<input type="number" step="0.01" name="kaution_betrag" /></label>
-        <label class="check"><input type="checkbox" name="gesamtschuldnerisch" checked /> Gesamtschuldnerisch</label>
-        <label class="check"><input type="checkbox" name="kaution_erhalten" /> Kaution erhalten</label>
-        <button type="submit" class="btn">Hinzufügen</button>
-      </form>
-    </details>
-  </section>
-
-  <!-- History (moved-out) -->
-  {#if tenants.some(t => t.auszug)}
-  <section class="card">
-    <h2>Ehemalige Mieter</h2>
-    {#each tenants.filter(t => t.auszug) as ct}
-    <div class="tenant-row muted">
-      <div class="info">
-        <a href="/tenants/{ct.tenant_id}">{ct.nachname}, {ct.vorname}</a>
-        <span class="meta">{ct.einzug ?? '?'} → {ct.auszug}</span>
-      </div>
+  <!-- Ehemalige Mieter -->
+  {#if formerTenants.length > 0}
+  <div class="card overflow-hidden">
+    <div class="px-6 py-4 border-b border-border-subtle bg-surface-container-lowest">
+      <h3 class="font-headline-sm text-headline-sm" style="font-family:'Hanken Grotesk',sans-serif">Ehemalige Mieter</h3>
     </div>
-    {/each}
-  </section>
+    <div class="divide-y divide-border-subtle">
+      {#each formerTenants as ct}
+      <div class="px-6 py-4 flex items-center justify-between opacity-60">
+        <div>
+          <a href="/tenants/{ct.tenant_id}" class="font-body-sm font-semibold text-on-surface hover:text-secondary">{ct.nachname}, {ct.vorname}</a>
+          <p class="font-label-caps text-label-caps text-on-surface-variant mt-0.5">{ct.einzug ?? '?'} → {ct.auszug}</p>
+        </div>
+        <span class="badge-ended">AUSGEZOGEN</span>
+      </div>
+      {/each}
+    </div>
+  </div>
   {/if}
 </div>
-
-<style>
-  .breadcrumb { font-size:.875rem; color:#71717a; margin-bottom:1.5rem; }
-  .breadcrumb a { color:#6366f1; text-decoration:none; }
-  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(380px,1fr)); gap:1.25rem; }
-  .card { background:#fff; border-radius:10px; padding:1.5rem; box-shadow:0 1px 4px rgba(0,0,0,.07); }
-  h2 { margin:0 0 1.25rem; font-size:1rem; }
-  .kv { display:flex; justify-content:space-between; padding:.5rem 0; border-bottom:1px solid #f4f4f5; font-size:.9rem; }
-  .kv span { color:#71717a; }
-  .tenant-row { padding:.75rem 0; border-bottom:1px solid #f4f4f5; }
-  .tenant-row.muted { opacity:.6; }
-  .info a { font-size:.95rem; color:#6366f1; text-decoration:none; font-weight:500; }
-  .meta { display:block; font-size:.8rem; color:#71717a; margin-top:.15rem; }
-  .badge { padding:.15rem .5rem; border-radius:999px; font-size:.72rem; font-weight:500; margin-left:.4rem; }
-  .badge.blue { background:#eff6ff; color:#1d4ed8; }
-  .form-toggle summary { cursor:pointer; font-size:.875rem; color:#6366f1; margin-top:.75rem; }
-  .sub-form { display:flex; flex-wrap:wrap; gap:.75rem; margin-top:.75rem; align-items:flex-end; }
-  label { display:flex; flex-direction:column; gap:.3rem; font-size:.875rem; font-weight:500; color:#3f3f46; }
-  label.check { flex-direction:row; align-items:center; gap:.5rem; }
-  select,input[type=date],input[type=number] { padding:.45rem .65rem; border:1px solid #d4d4d8; border-radius:6px; font-size:.875rem; }
-  .btn { background:#6366f1; color:#fff; border:none; padding:.5rem 1rem; border-radius:6px; cursor:pointer; font-size:.875rem; }
-  .btn:hover { background:#4f46e5; }
-  .btn-sm { background:#6366f1; color:#fff; border:none; padding:.35rem .75rem; border-radius:6px; cursor:pointer; font-size:.8rem; }
-  .link { cursor:pointer; font-size:.8rem; color:#6366f1; margin-top:.4rem; }
-  .auszug-form { margin-top:.35rem; }
-  .auszug-form summary { list-style:none; }
-  .inline-form { display:flex; gap:.5rem; align-items:center; margin-top:.5rem; }
-  .err { background:#fef2f2; border:1px solid #fecaca; color:#b91c1c; padding:.6rem; border-radius:6px; margin-bottom:1rem; }
-  .ok  { background:#f0fdf4; border:1px solid #bbf7d0; color:#15803d; padding:.6rem; border-radius:6px; margin-bottom:1rem; }
-</style>

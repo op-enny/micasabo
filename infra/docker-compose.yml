@@ -1,0 +1,46 @@
+services:
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    environment:
+      DOMAIN: ${DOMAIN:-localhost}
+    depends_on:
+      - frontend
+      - backend
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      ORIGIN: https://${DOMAIN:-localhost}
+      BACKEND_URL: http://backend:3001
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    user: "1000:1000"
+    environment:
+      DB_PATH: /data/micasabo.db
+      PORT: "3001"
+      SESSION_SECRET: ${SESSION_SECRET}
+    volumes:
+      - db_data:/data
+      - ../schema.sql:/app/schema.sql:ro
+
+volumes:
+  caddy_data:
+  caddy_config:
+  db_data:

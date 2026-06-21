@@ -1,0 +1,13 @@
+{$DOMAIN:localhost} {
+	encode gzip
+
+	# Backend API
+	handle /api/* {
+		reverse_proxy backend:3001
+	}
+
+	# Frontend (SvelteKit)
+	handle {
+		reverse_proxy frontend:3000
+	}
+}

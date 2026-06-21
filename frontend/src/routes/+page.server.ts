@@ -1,17 +1,8 @@
-import type { Actions } from './$types';
-import { fail } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
+import type { PageServerLoad } from './$types';
 
-export const actions: Actions = {
-  default: async ({ request }) => {
-    const data = await request.formData();
-    const email = data.get('email');
-    const password = data.get('password');
-
-    if (!email || !password) {
-      return fail(400, { error: 'E-Mail und Passwort erforderlich.' });
-    }
-
-    // Auth logic implemented in Phase 1
-    return fail(401, { error: 'Anmeldung noch nicht implementiert (Phase 1).' });
-  }
+export const load: PageServerLoad = async ({ cookies }) => {
+  const session = cookies.get('session');
+  if (session) throw redirect(302, '/dashboard');
+  throw redirect(302, '/login');
 };

@@ -34,8 +34,11 @@ services:
     user: "1000:1000"
     environment:
       DB_PATH: /data/micasabo.db
+      UPLOAD_DIR: /data/uploads
       PORT: "3001"
       SESSION_SECRET: ${SESSION_SECRET}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
     volumes:
       - db_data:/data
       - ../schema.sql:/app/schema.sql:ro

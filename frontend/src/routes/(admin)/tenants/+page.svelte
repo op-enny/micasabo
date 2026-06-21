@@ -6,71 +6,84 @@
 
 <svelte:head><title>micasabo · Mieter</title></svelte:head>
 
-<div class="header">
-  <h1>Mieter</h1>
-  <button class="btn" onclick={() => showForm = !showForm}>+ Anlegen</button>
+<div class="mb-stack-lg flex flex-col md:flex-row md:items-end justify-between gap-stack-md">
+  <div>
+    <p class="font-label-caps text-label-caps text-on-surface-variant uppercase">VERWALTUNG</p>
+    <h2 class="font-display-lg text-4xl font-bold text-on-surface mt-1" style="font-family:'Hanken Grotesk',sans-serif">Mieter</h2>
+  </div>
+  <button class="btn-primary" onclick={() => showForm = !showForm}>
+    <span class="material-symbols-outlined text-[20px]">person_add</span>
+    Mieter anlegen
+  </button>
 </div>
 
 {#if showForm}
-<form method="POST" action="?/create" use:enhance class="create-form">
-  {#if form?.error}<p class="err">{form.error}</p>{/if}
-  <div class="row">
-    <label>Vorname<input name="vorname" required /></label>
-    <label>Nachname<input name="nachname" required /></label>
-    <label>E-Mail<input type="email" name="email" /></label>
-  </div>
-  <div class="row">
-    <label>Telefon<input name="telefon" /></label>
-    <label>Geburtsdatum<input type="date" name="geburtsdatum" /></label>
-    <label>Notizen<input name="notizen" /></label>
-  </div>
-  <div class="actions">
-    <button type="submit" class="btn">Speichern</button>
-    <button type="button" class="btn-ghost" onclick={() => showForm = false}>Abbrechen</button>
-  </div>
-</form>
+<div class="card p-6 mb-stack-lg">
+  <h3 class="font-headline-sm text-headline-sm mb-6" style="font-family:'Hanken Grotesk',sans-serif">Neuer Mieter</h3>
+  <form method="POST" action="?/create" use:enhance>
+    {#if form?.error}
+      <div class="flex items-center gap-3 p-3 bg-error-container rounded border-l-4 border-error mb-4">
+        <span class="material-symbols-outlined text-error text-[20px]">error</span>
+        <p class="font-body-sm text-on-error-container">{form.error}</p>
+      </div>
+    {/if}
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-stack-md">
+      <div><label class="label">VORNAME</label><input name="vorname" required class="input" /></div>
+      <div><label class="label">NACHNAME</label><input name="nachname" required class="input" /></div>
+      <div><label class="label">E-MAIL</label><input type="email" name="email" class="input" /></div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-6">
+      <div><label class="label">TELEFON</label><input name="telefon" class="input" /></div>
+      <div><label class="label">GEBURTSDATUM</label><input type="date" name="geburtsdatum" class="input" /></div>
+      <div><label class="label">NOTIZEN</label><input name="notizen" class="input" /></div>
+    </div>
+    <div class="flex gap-3">
+      <button type="submit" class="btn-primary">Speichern</button>
+      <button type="button" class="btn-secondary" onclick={() => showForm = false}>Abbrechen</button>
+    </div>
+  </form>
+</div>
 {/if}
 
-<form method="GET" class="search">
-  <input name="q" placeholder="Nach Name oder E-Mail suchen …" value={data.q} />
-  <button type="submit" class="btn-ghost">Suchen</button>
+<!-- Search -->
+<form method="GET" class="mb-stack-md flex gap-3">
+  <div class="relative flex-1 max-w-sm">
+    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+    <input name="q" class="input pl-10" placeholder="Nach Name oder E-Mail suchen …" value={data.q} />
+  </div>
+  <button type="submit" class="btn-secondary">Suchen</button>
 </form>
 
-<table>
-  <thead><tr><th>Name</th><th>E-Mail</th><th>Telefon</th><th></th></tr></thead>
-  <tbody>
-    {#each data.tenants as t}
-    <tr>
-      <td><a href="/tenants/{t.id}">{t.nachname}, {t.vorname}</a></td>
-      <td>{t.email ?? '—'}</td>
-      <td>{t.telefon ?? '—'}</td>
-      <td><a href="/tenants/{t.id}" class="link">→</a></td>
-    </tr>
-    {/each}
-    {#if data.tenants.length === 0}
-    <tr><td colspan="4" class="empty">Keine Mieter vorhanden.</td></tr>
-    {/if}
-  </tbody>
-</table>
-
-<style>
-  .header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; }
-  h1 { margin:0; font-size:1.5rem; }
-  .btn { background:#6366f1; color:#fff; border:none; padding:.55rem 1.1rem; border-radius:6px; cursor:pointer; font-size:.9rem; }
-  .btn:hover { background:#4f46e5; }
-  .btn-ghost { background:none; border:1px solid #d4d4d8; padding:.55rem 1.1rem; border-radius:6px; cursor:pointer; font-size:.9rem; }
-  .create-form { background:#fff; border:1px solid #e4e4e7; border-radius:10px; padding:1.5rem; margin-bottom:1.5rem; }
-  .row { display:flex; flex-wrap:wrap; gap:1rem; margin-bottom:1rem; }
-  label { display:flex; flex-direction:column; gap:.3rem; font-size:.875rem; font-weight:500; color:#3f3f46; flex:1; min-width:150px; }
-  input { padding:.5rem .65rem; border:1px solid #d4d4d8; border-radius:6px; font-size:.9rem; }
-  .actions { display:flex; gap:.75rem; }
-  .search { display:flex; gap:.75rem; margin-bottom:1.25rem; }
-  .search input { flex:1; padding:.55rem .75rem; border:1px solid #d4d4d8; border-radius:6px; font-size:.9rem; }
-  table { width:100%; border-collapse:collapse; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,.07); }
-  th { text-align:left; padding:.75rem 1rem; font-size:.8rem; color:#71717a; border-bottom:1px solid #e4e4e7; }
-  td { padding:.75rem 1rem; border-bottom:1px solid #f4f4f5; font-size:.9rem; }
-  .link { color:#6366f1; text-decoration:none; }
-  .empty { text-align:center; color:#a1a1aa; padding:2rem; }
-  .err { background:#fef2f2; border:1px solid #fecaca; color:#b91c1c; padding:.6rem; border-radius:6px; margin-bottom:1rem; }
-  a { color:#6366f1; text-decoration:none; }
-</style>
+<div class="card overflow-hidden">
+  <div class="px-6 py-4 border-b border-border-subtle flex justify-between items-center bg-surface-container-lowest">
+    <h3 class="font-headline-sm text-headline-sm" style="font-family:'Hanken Grotesk',sans-serif">Mieterliste</h3>
+    <span class="font-label-caps text-label-caps text-on-surface-variant">{data.tenants.length} EINTRÄGE</span>
+  </div>
+  <div class="overflow-x-auto">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>NAME</th>
+          <th>E-MAIL</th>
+          <th>TELEFON</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {#each data.tenants as t}
+        <tr onclick={() => window.location.href = `/tenants/${t.id}`}>
+          <td class="font-semibold text-on-surface">{t.nachname}, {t.vorname}</td>
+          <td class="text-on-surface-variant">{t.email ?? '—'}</td>
+          <td class="font-label-caps text-label-caps text-on-surface-variant">{t.telefon ?? '—'}</td>
+          <td class="text-right">
+            <a href="/tenants/{t.id}" class="text-secondary hover:underline font-label-caps text-label-caps" onclick|stopPropagation>ÖFFNEN →</a>
+          </td>
+        </tr>
+        {/each}
+        {#if data.tenants.length === 0}
+        <tr><td colspan="4" class="text-center py-12 text-on-surface-variant font-body-sm">Keine Mieter vorhanden.</td></tr>
+        {/if}
+      </tbody>
+    </table>
+  </div>
+</div>
